@@ -6,6 +6,244 @@
 	<title>World of PKI</title>
 </head>
 <body>
+ <h1>Cryptography</h1>
+        <p>
+       Cryptography is associated with the process of converting the plain text message to an unintelligible text and vice versa. Which is nothing but hiding the message in plain text. you are making it unreadable for everyone else apart from the intended audience. 
+Cryptography is not just encryption. it uses set of procedures known as cryptographic algorithms or ciphers to encrypt & decrypt messages. 
+Cryptographic methods are not something that came into life in the modern world. though debatable, it is recorded that the first known cryptographic algorithm -Hieroglyphics was formulated back in 3000BC. post that there have been many many cryptographic algorithms that have been developed and it has evolved since then. 
+For those interested you can read more about cryptography and evolution in the book Cryptography and Network security by William Stallings. 
+        </p>
+        <h1>Encryption Types</h1>
+        <p>
+        Cryptography supports two encryption types. <b>Symmetric</b> and <b>Asymmetric</b>. <br><br>
+In <b>symmetric encryption </b> same key is used to encrypt and decrypt the information. The key must be exchanged in a secure manner to avoid hackers misusing the information and tampering with it. 
+Some of the examples of symmetric encryption are - RC2, RC4, RC5, DES, 3DES, AES, TwoFish & many more. <br><br>
 
+In <b>asymmetric encryption</b>, two different keys are used to encrypt and decrypt the messages. one key is used to encrypt the data by the sender and one key is used by recipient  to decrypt the message. this key pair is called as public and private key pair.  
+some of the examples of this encryption method are RSA , Diffie- Hellman, DSA and Eliptic Curve Cryptosystem.<br>
+RSA is the most used and famous algorithm. while ECC is considered as the most efficient algorithm. 
+        </p>
+        <h1>Signing Process Comparison</h1>
+        <p>
+            <img src="C:\learning\coureseera-test\pki\images\sy.PNG" alt="Symmetric Encryption"> <p style="text-align: center;">Symmetric Encryption</p> <br><br>
+            <img src="C:\learning\coureseera-test\pki\images\asy.PNG" alt="Asymmetric Encryption"> <p style="text-align: center;">Asymmetric Encryption</p> <br><br>
+        </p>
+        <h1>Foundations of PKI</h1>
+        <p>
+          Both symmetric and asymmetric encryption methods have their own merits and demerits. combining these methods take the advantage of their strengths defines the PKI framework. 
+we use symmetric encryption method to encrypt the plain text and thus take the advantage of faster encryption and decryption process. 
+we use asymmetric encryption to exchange the key which is used to encrypt the message in the symmetric encryption. since the key will be much smaller than message, the time consumed to encrypt and decrypt the data will be acceptable. 
+        </p>
+        <p> The below figure shows the process that will take place when symmetric and asymmetric encryption methods are combined.</p>
+            <p><img src="C:\learning\coureseera-test\pki\images\pki.PNG" alt="PKI Signing process"> <p style="text-align: center;">Combining symmetric and asymmetric encryption</p> </p>
+            <p>
+                <ol style="font-family: 'Courier New', Courier, monospace; padding: 10px; margin: 30px; font-size: 110%;">
+                    <li>The sender retrieves the recipient’s public key. In an AD DS environment, the sender 
+                        retrieves the public key from a trusted source, such as AD DS</li>
+                    <li>The sender generates a symmetric key and uses this key to encrypt the original data.</li>
+                    <li>The symmetric key is encrypted with the recipient’s public key to prevent the symmetric 
+                        key from being intercepted during transmission</li>
+                    <li>The encrypted symmetric key and encrypted data are provided to the intended recipient</li>
+                    <li>The recipient uses his or her private key to decrypt the encrypted symmetric key</li>
+                    <li>The encrypted data is decrypted with the symmetric key, which results in the recipient 
+                        obtaining the original data</li>
+                </ol>
+            </p>
+        <h2>Hash Algorithms</h2>
+        <p>
+        The goal of cryptography is three-fold: keep data secret, identify if data has been modified, and 
+prove the source of the data. Although encryption can keep data secret and protect data 
+against modification, only digital signing proves the source of the data in addition to protecting 
+the data from modification. Digital signing protects data in the following ways
+            <ul style="font-family: 'Courier New', Courier, monospace; padding: 10px; margin: 30px; font-size: 110%;">
+                <li>The digital signing process uses a hash algorithm to determine whether the original 
+                    data has been modified in any way</li>
+                <li>A digital signature applied to the resulting message digest identifies who signed the 
+                    message digest. This signing prevents users from denying they signed the message 
+                    digest, as only they have access to the private key used to sign the message digest. The 
+                    inability for signers to deny that a signature is theirs is known as non-repudiation</li>
+            </ul> </p>
+        <p> What is <b>Hash </b>process? 
+            A hash algorithm takes a plaintext document as input and produces a mathematical result for 
+            the two inputs. This mathematical result is referred to as a hash value, message digest, digest, or 
+            thumbprint. if the message is changed, then the result will change accordingly. <br>
+           It is just like putting a set of ingredients into mixer and grinding them. the end result is the hash. As you change the ingredients, the output also changes.<.<br> 
+            Commonly used has algorithms are  MD5 SHA1<br>
+            Although the SHA1 algorithm is slightly slower than MD5, it is considered more difficult to 
+            find two data inputs that result in the same hash value when you use the SHA1 algorithm
+        </p>
+        <h2>Cryptography Next Generation (CNG)</h2>
+        <p>
+        CNG is the replacement cryptography application programing  interface (API) for the original Windows CryptoAPI. The new APIs will allow the use 
+of newer, stronger encryption and signing algorithms when implementing cryptography. this option was included in Win2008  and Windows vista operating system.<br>
+CNG has the following features that differentiate it from the legacy CryptoAPI:
+<ul style="font-family: 'Courier New', Courier, monospace; padding: 10px; margin: 30px; font-size: 110%;">
+        <li><b>Auditing </b> CNG increases auditing abilities to meet Common Criteria requirements. The 
+            events are captured by the Key Service Provider (KSP).</li>
+        <li><b>Certification and Compliance </b> CNG is targeting Federal Information Processing 
+            Standards (FIPS) 140-2 level 2 certification together with Common Criteria evaluation 
+            on selected platforms.</li>
+        <li><b>Cryptographic Agility </b> CNG will support cryptographic agility, or the ability to deploy 
+            new cryptographic algorithms for an existing protocol such as Transport Layer 
+            Security/Secure Sockets Layer (TLS/SSL) or to disable algorithms if a vulnerability is 
+            found with the specific algorithm. This modification to cryptographic operations 
+            required converting most standard cryptographic protocols (TLS/SSL, Secure Multipurpose Internet Mail Extensions, or S/MIME, Internet Protocol security, or IPsec, and 
+            Kerberos) to allow these protocols to take advantage of new algorithms available in CNG.</li>
+        <li><b>Kernel Mode </b>CNG supports cryptography in kernel mode. Kernel mode 
+            provides better performance for common cryptographic features such as TLS/SSL and 
+            IPsec. That being said, not all CNG functions can be called from kernel mode.</li>
+        <li><b>Key Storage  </b>CNG provides a model for key storage that supports both legacy and 
+            CNG-capable applications</li>
+        <li><b>Key Isolation  </b>CNG isolates long-lived keys so that they are never present in the 
+            application process. For example, CNG allows any computer with a Trusted Platform 
+            Module (TPM) to provide key isolation and key storage in TPM. you may have heard of TPM in Win 11 too.</li>
+    </ul>
+        </p>
+        <h1>Hardware Security Module (HSM)</h1>
+        <p>A key concept before we conclude this section will be the HSM. Hardware Security Module is the one of the most important block in PKI world and this ensures the security of the keys. 
+            HSM generates keys from an entropy using a random number generator.<br> HSM assists in ensuring the keys are not stored in any disk or memory 
+            HSMs are hardened and tamper resistant hardware that secure keys.<br> There are two types of HSMs. general purpose HSMs  and Financial HSM (payment HSMs). we use general purpose HSMs in our PKI environment. the Digital team owns and manages the financial HSMs.  
+        </p>
+        <h1>Public Key Infrastructure (PKI)</h1>
+        <p><b>PKI </b> is a combination of software, encryption technologies, processes & services that are required to manage the lifecycle of digital certificates and public keys. 
+            these policies procedures help an organization to secure its communication  and business transactions. <br>
+            
+            Goals of PKI - 
+            <b>Confidentiality</b> - assurance that no entity can maliciously or unwittingly view a payload in clear text data. data will be encrypted and will be gibberish.<br> 
+            
+            <b>Integrity </b> - assurance that the integrity is compromised if the data is changed / tampered even slightly<br>  
+            
+            <b>Authenticity </b> - assurance that the entity has certanity of what it is connecting to or can evidence its legitimacy when connected to protected device<br> 
+            
+            <b>Non-Repudiation </b>: assurance that the entity is genuine with high confidence and provides proof of integrity & origin of data.<br> </p>
+            <h1>Building blocks of PKI</h1>
+            <h2>Certificates</h2>
+            <p>Certificates are the foundations of PKI. they are the electronic representation of users, systems, devices or services and these certificates are issued by a certification authority. 
+                these certificates are digitally signed and usually of size 2-4kb.<br>
+                Certificates will usually have these information
+                <ul style="font-family: 'Courier New', Courier, monospace; padding: 10px; margin: 30px; font-size: 110%;">
+                    <li>Information about the user or a system</li>
+                    <li>Informaton about the issuing CA</li>
+                    <li>Public key information</li>
+                    <li>Supported algorithm details</li>
+                    <li>Extensions part of the certificates</li>
+                    <li>Revocation information </li>
+                </ul>
+            </p>
+            <p>Three versions of certificates are available to be issued in PKI
+                x509 v1 , x509 v2, x509 v3. version 1 & 2 are quite legacy ones and not commonly used. for the sake of time, i'm going to skip them. but, for information, v1 came out in 1988<br>
+                v2 was released in 1993. the major update in v2 was it added fields to identify the issuers of the certificate<br>
+                v3 was released in 1996 and is the most commonly used certificate version. it introduced several extensions to address the problems reported by it's predecessors. 
+all the extension fields in v3 plays a major role. some of the new fields introduced in v3 are SAN, KU, private key usage period, EKU, CDP etc. 
+            </p>
+            <h2>Certificate Authorities (CA)</h2>
+            <p> it is the job of the certificate authority to ensure only legit users are allowed to submit requests for a certificates. CAs employ security measures to ensure the identity of the requestor. once the identity is validated, it starts issuing the certificate. 
+                <br>The main tasks of CA is to 
+                <ul style="font-family: 'Courier New', Courier, monospace; padding: 10px; margin: 30px; font-size: 110%;">
+                    <li>verify the identity of the certificate requestor</li>
+                    <li>issuing the certificate to the requestor</li>
+                    <li>manages certificate revocation </li>
+                </ul>
+            </p>
+            <p>
+                  Common practice is to have more than one CA implemented in enterprises. CAs are organized into a hierarchy. most common implementation is to have one offline root ca and then two or more online issuing / sub ordinate CAs.
+            </p>
+            <p>
+                <b>Root CA </b> is the topmost CA in CA hierarchy.<br> In PKI it acts as the trust point. The certificates issued by that particular authority. 
+                The root CA cert is self issued cert, which means, issuer and issued to field will have same value. The only way to validate a root cert is by including the root CA into the trust store. <br>In JCP, we have the JCP RCA added to the trust store on all machines and hence any certificate issued by it is considered to be valid.
+                if you install a certificate issued from any other org, whose RCA and ICA certs are not in trust store, you will see the warning and trust chain won't be established. 
+                All well known trusted third party CAs like <b>DigiCert</b>, <b>Sectigo</b>, <b>Go Daddy</b> follow this model and applications too support this model.<br> 
+                It is a common and security best practice for RCA to issue certs only to issuing CAs. RCAs do not usually issue certs to users or machines. 
+            </p>
+            <p>
+                <b>Issuing CA</b> The next CA in hierarchy is the intermediate CA. it can exist at any level in an organization. <br>
+                for a long period, most of the organizations followed a three tier CA model.<br>
+                Root -- Policy -- Issuing. <br>
+                Policy CA was made used to define and describe the policies and procedures that an organization has implemented to validate the certificate holder identity and also to secure the CA<br>
+                Issuing CAs were used to issue certs to end users and machines and was the third tier in this hierarchy. it used to enforce the policies that was defined by the policy CA.<br>
+                In JCP, we have a two tier CA and issuing CA acts as a policy CA as well. and, nope, this is not uncommon. this model is also adopted widely in the industry.<br>
+            </p>
+            <h2>Certificate Revocation List (CRL)</h2>
+            <p>
+                A CRL is a digitally signed list including all the certificates which have been revoked, issued by the CA that originally enrolled the certificates<br>
+                Applications or systems can perform CRL checking to determine a presented certificate's revocation status<br>
+                A CRL is typically generated and published periodically, following a clearly defined timeframe
+                The CA publishes the CRL in a publicly accessible location<br>
+                From win 2k8, two types of issuances are supported - base CRL and delta CRL.<br>
+                A <b>Base CRL </b>contains the serial numbers of all certificates revoked on a CA that are still time 
+                valid, as well as the reason for each revocation. A base CRL contains all time-valid revoked 
+                certificates signed by a CA’s specific private key.<br>
+                A <b>Delta CRL </b>contains only the serial numbers and revocation reasons for certificates revoked 
+                since the last base CRL was published. <br>A delta CRL is implemented to provide more timely 
+                revocation information from a CA and to decrease the amount of data downloaded when 
+                retrieving a CRL.<br>
+                The delta CRL is much smaller than a base CRL because only the most recent revocations are 
+                included. The base CRL, which contains all revoked certificates, can be downloaded less 
+                frequently
+            </p>
+            <p>
+                When a certificate is revoked, the CRL entry must contain further information about the 
+                revocation. The reason codes can include:
+                <ul style="font-family: 'Courier New', Courier, monospace; padding: 10px; margin: 30px; font-size: 110%;">
+                    <li>
+                        <b>Key Compromise </b>The private key associated with the certificate has been stolen or otherwise acquired by an unauthorized person, such as when a computer is stolen or a 
+                            smart card is lost.
+                    </li>
+                    <li><b>CA Compromise </b>The private key of a CA has been compromised. This can occur 
+                        when the computer running Certificate Services or the physical device that stores the 
+                        CA’s private key is stolen. If a CA’s certificate is revoked, every certificate issued by the 
+                        CA is also considered revoked because the CA that issued the certificates is no longer 
+                        considered trustworthy. </li>
+                    <li><b>Affiliation Changed </b>The subject of the certificate, typically a user, is no longer affiliated 
+                        with an organization.</li>
+                    <li><b>Superseded </b>The revoked certificate has been replaced by a new certificate. This can 
+                        occur because of changes in the extensions in a certificate or the certificate’s subject 
+                        name changes.</li>
+                    <li><b>Cessation Of Operation </b>The certificate’s subject has been decommissioned. This can 
+                        take place when a Web server is replaced by a new Web server with a new name. 
+                        Likewise, this can occur when a merger takes place and the previous DNS name is 
+                        decommissioned, requiring replacement of all Web server certificates.</li>
+                    <li><b>Certificate Hold </b>A revocation where a certificate is determined to be temporarily 
+                        revoked. This can occur when an employee takes a leave of absence. Certificate Hold is 
+                        the only revocation reason that allows a certificate to be unrevoked</li>
+                    <li><b>Remove From CRL </b>This reason is used when a certificate is unrevoked after being 
+                        revoked with the Certificate Hold reason. Remove From CRL is used only in delta CRLs 
+                        to indicate that a certificate revoked in the base CRL is unrevoked in the delta CRL. </li>
+                    <li><b>Unspecified </b>If a certificate is revoked without providing a revocation reason, the 
+                        unspecified reason is automatically included in the CRL.</li>
+                </ul>
+            </p>
+            <h2>Online Certificate Status Protocol (OCSP)</h2>
+            <p>
+                Windows Server 2008 introduces an alternative to certificate revocation lists to determine 
+whether a certificate is revoked. Rather than a client downloading a base CRL or delta CRL, 
+the client (OCSP client) sends an HTTP-based certificate status request to a server (referred to 
+as an OCSP responder). 
+            </p>
+            <p>
+                It is a simple 5 step process. 
+                <ol style="font-family: 'Courier New', Courier, monospace; padding: 10px; margin: 30px; font-size: 110%;">
+                    <li>CAs publish CRLs</li>
+                    <li>OCSP array has access to these CRLs</li>
+                    <li>The client wants to verify a single certificate and sends the serial number of the certificate to the OCSP array using a HTTP request</li>
+                    <li>OCSP responder(s) verify the serial number by checking if the serial number was revoked, this is done by the OCSP server by CRL checking or by OCSP CRL cache checking</li>
+                    <li>If the certificate / serial number was revoked, the client will get this information in the HTTP response</li>
+                </ol>
+            </p>
+            <h1>Connecting the dots</h1>
+            <p>
+            We have looked at ciphers, building blocks and Foundations of PKI. so let us put all the pieces together now.<br>
+            Let us try to relate everything to a real world scenario. If you want to fly to a different country, you would need to apply for a passport. 
+            You will submit an application, provide supporting documents to prove your identity and once everything is done you will get a passport with a 
+            unique serial number, with all your information recorded and a stamp from the authority signifying the authenticity of the document. 
+            During the boarding process, the security personnel will verify the details in your passport, look for the expiration dates, authenticity of the
+            passport and finally, if you are in no fly list of not. <br><br>
+            Now, let us connect everything to PKI universe.<br>
+            For a web application to switch to HTTPS, it will need to have a certificate. A system will submit a CSR to the CA to get a certificate. Once the 
+            CA issues a certificate, binding process will be completed at the application end. When a user tries to access this application, browser will check
+            for the certificate authenticity, validity, issuer information and finally, if it is revoked or not. Once all the checks are passed, user can view the 
+            web page and browsers display a secure message (A pad lock in Chrome browser). <br><br>
+            Passport is like a certificate, the authority who issued it are like CAs. The security personnel who validates, is like a browser and the No fly list is 
+            equal to CRL. 
 </body>
 </html>
